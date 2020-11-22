@@ -20,7 +20,7 @@ var IndecisionApp = function (_React$Component) {
     _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
     _this.handleAddOption = _this.handleAddOption.bind(_this);
     _this.state = {
-      options: []
+      options: props.options
     };
     return _this;
   }
@@ -59,13 +59,12 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var title = "indecision";
       var subtitle = "Put your life in the hands of a computer";
 
       return React.createElement(
         "div",
         null,
-        React.createElement(Header, { title: title, subtitle: subtitle }),
+        React.createElement(Header, { subtitle: subtitle }),
         React.createElement(Action, {
           hasOptions: this.state.options.length > 0,
           handlePick: this.handlePick
@@ -82,6 +81,13 @@ var IndecisionApp = function (_React$Component) {
   return IndecisionApp;
 }(React.Component);
 
+// default props form IndecisionApp
+
+
+IndecisionApp.defaultProps = {
+  options: []
+};
+
 var Header = function Header(props) {
   return React.createElement(
     "div",
@@ -91,12 +97,19 @@ var Header = function Header(props) {
       null,
       props.title
     ),
-    React.createElement(
+    props.subtitle && React.createElement(
       "h2",
       null,
       props.subtitle
     )
   );
+};
+
+// setting defaultProps
+Header.defaultProps = {
+  title: "some default!"
+
+  // subtitle: "Put your life in the hands of a computer",
 };
 
 var Action = function Action(props) {
@@ -133,18 +146,6 @@ var Options = function Options(props) {
     })
   );
 };
-
-// class Options extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.handleRemoveAll = this.handleRemoveAll.bind(this);
-//   }
-//   handleRemoveAll() {
-//     this.props.handleDeleteOption();
-//   }
-//   render() {
-//   }
-// }
 
 var AddOptions = function (_React$Component2) {
   _inherits(AddOptions, _React$Component2);
